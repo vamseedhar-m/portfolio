@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vamseedhar Reddy · AI Product Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f9f8f6;
+      --ink: #111111;
+      --ink-mid: #555550;
+      --ink-light: #999990;
+      --ink-ghost: #d8d8d4;
+      --border: #e6e6e2;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 52px;
+      height: 58px;
+      transition: border-color 0.2s;
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 17px;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--ink-mid);
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 0 52px;
+    }
+
+    /* HERO */
+    #hero {
+      padding: 148px 52px 96px;
+      max-width: 1020px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      min-height: 86vh;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(50px, 6vw, 78px);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+    }
+
+    .hero-name em { font-style: italic; }
+
+    .hero-bio {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.75;
+    }
+
+    .hero-descriptor {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ink-mid);
+      line-height: 1.5;
+      margin-bottom: 40px;
+    }
+
+    .hero-links {
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-link-row a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-mid);
+      transition: color 0.15s;
+    }
+
+    .hero-link-row a:hover { color: var(--ink); }
+    .hero-link-row a:hover .arrow { transform: translate(3px, -3px); }
+
+    .arrow {
+      font-size: 12px;
+      color: var(--ink-ghost);
+      transition: transform 0.15s, color 0.15s;
+    }
+
+    .hero-link-row a:hover .arrow { color: var(--ink-mid); }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+      margin-bottom: 52px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-ghost);
+    }
+
+    /* PROJECTS */
+    #projects {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--white);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: background 0.15s;
+    }
+
+    .project-card:hover { background: var(--off-white); }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--ink-ghost);
+    }
+
+    .status-pill {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+    }
+
+    .pill-building {
+      color: #a07000;
+      border-color: rgba(200,160,0,0.2);
+      background: #fdf8e8;
+    }
+    .pill-building::before { background: #c99000; animation: blink 1.8s infinite; }
+
+    .pill-planned {
+      color: var(--ink-light);
+      border-color: var(--border);
+      background: var(--off-white);
+    }
+    .pill-planned::before { background: var(--ink-ghost); }
+
+    .pill-live {
+      color: #1a7a3c;
+      border-color: #d4f0df;
+      background: #f0faf4;
+    }
+    .pill-live::before { background: #2db85a; }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    .card-domain {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      color: var(--ink-light);
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+
+    .card-action {
+      font-size: 12px;
+      color: var(--ink-light);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* EXPERIENCE */
+    #experience {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 148px 200px 1fr;
+      gap: 32px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .exp-row:first-child { border-top: 1px solid var(--border); }
+
+    .exp-period {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink-light);
+      padding-top: 3px;
+    }
+
+    .exp-company {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .exp-role {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink-light);
+      margin-top: 3px;
+    }
+
+    .exp-detail {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.7;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 96px 0 120px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(34px, 4vw, 50px);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-headline em { font-style: italic; }
+
+    .contact-note {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      margin-top: 16px;
+      line-height: 1.75;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      background: var(--white);
+      transition: all 0.15s;
+      text-align: left;
+      width: 100%;
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .contact-btn:hover {
+      border-color: var(--ink);
+      background: var(--off-white);
+    }
+
+    .contact-btn:hover .btn-arrow { color: var(--ink-mid); transform: translate(3px,-3px); }
+
+    .btn-label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 3px;
+    }
+
+    .btn-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .btn-arrow {
+      font-size: 15px;
+      color: var(--ink-ghost);
+      transition: transform 0.15s, color 0.15s;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 22px 52px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--ink-light);
+    }
+
+    /* FADE IN */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #hero .hero-left  { animation: fadeIn 0.5s ease both; }
+    #hero .hero-right { animation: fadeIn 0.5s ease 0.1s both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; gap: 48px; padding: 100px 24px 64px; min-height: auto; }
+      .container { padding: 0 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .exp-row { grid-template-columns: 1fr; gap: 4px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a href="#" class="nav-name">Vamseedhar Reddy</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div id="hero">
+    <div class="hero-left">
+      <div class="hero-label">AI Product Builder · San Francisco</div>
+      <h1 class="hero-name">Vamseedhar<br /><em>Reddy M</em></h1>
+      <p class="hero-bio">
+        I ship AI products — voice agents, identity systems, intelligent enforcement — 
+        fast, and in environments where the cost of being wrong is real. 
+        Looking to do that at the earliest, most ambitious stage.
+      </p>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-links">
+        <div class="hero-link-row">
+          <a href="#projects">
+            <span>Projects</span><span class="arrow">↓</span>
+          </a>
+        </div>
+        <div class="hero-link-row">
+          <a href="#experience">
+            <span>Professional Experience</span><span class="arrow">↓</span>
+          </a>
+        </div>
+        <div class="hero-link-row">
+          <a href="#contact">
+            <span>Get in touch</span><span class="arrow">↓</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Projects</span>
+        <span class="section-num">01</span>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 01</span>
+            <span class="status-pill pill-building">Building</span>
+          </div>
+          <div class="card-domain">Voice AI · Customer Support</div>
+          <div class="card-title">Escalation Decision Engine</div>
+          <p class="card-desc">When should an AI support agent hand off to a human? A classifier that reads conversation state — sentiment trajectory, resolution confidence, topic complexity — and triggers escalation before the customer has to ask.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">LLM</span><span class="tag">Agent Systems</span><span class="tag">Voice AI</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 02</span>
+            <span class="status-pill pill-planned">Planned</span>
+          </div>
+          <div class="card-domain">AI Safety · Agent Reliability</div>
+          <div class="card-title">Adversarial Input Probe</div>
+          <p class="card-desc">A structured test harness for conversational AI agents. Surfaces failure modes across jailbreaks, prompt injections, and topic drift — with a scorecard for each failure category and severity level.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">Red Teaming</span><span class="tag">Safety Evals</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 03</span>
+            <span class="status-pill pill-planned">Planned</span>
+          </div>
+          <div class="card-domain">Healthcare · Legal · Insurance</div>
+          <div class="card-title">AI Output Quality Evaluator</div>
+          <p class="card-desc">Hallucination and consistency scoring for AI-generated documents in high-stakes domains. Evaluates factual grounding, citation accuracy, and internal consistency across claims summaries and legal demand letters.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">Hallucination Detection</span><span class="tag">Claims</span><span class="tag">LLM Eval</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 04</span>
+            <span class="status-pill pill-planned">Planned</span>
+          </div>
+          <div class="card-domain">Personal Tool</div>
+          <div class="card-title">LinkedIn Saved Posts Synthesizer</div>
+          <p class="card-desc">Turns a graveyard of saved LinkedIn posts into an actual knowledge base. Clusters by theme, surfaces patterns, and generates a weekly digest — so the saving finally leads somewhere.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">RAG</span><span class="tag">Clustering</span><span class="tag">PKM</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 05</span>
+            <span class="status-pill pill-planned">Planned</span>
+          </div>
+          <div class="card-domain">Personal Tool</div>
+          <div class="card-title">Portfolio Monitor & Simulator</div>
+          <p class="card-desc">An AI-assisted portfolio dashboard that explains market moves in plain English, simulates scenario impact across rate changes and sector rotations, and flags when a thesis has materially changed.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">Financial AI</span><span class="tag">Scenario Modeling</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="card-top">
+            <span class="card-num">P — 06</span>
+            <span class="status-pill pill-planned">Planned</span>
+          </div>
+          <div class="card-domain">Personal Tool</div>
+          <div class="card-title">SF Weekend Planner</div>
+          <p class="card-desc">A conversational planner that reads your energy, not just your preferences. Takes context — who you're with, budget, how you feel — and returns a real itinerary, not a listicle.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">Conversational AI</span><span class="tag">Personalization</span></div>
+            <span class="card-action">Coming soon</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Experience</span>
+        <span class="section-num">02</span>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">2022 — Present</div>
+        <div>
+          <div class="exp-company">Tinder</div>
+          <div class="exp-role">Director of Product, Integrity · Match Group</div>
+        </div>
+        <div class="exp-detail">Led Face Check — a biometric AI product using liveness detection and 1:N facial recognition to verify users at scale. Built LLM-based content detection models, an AI-powered moderation system, and shipped EU DSA / UK OSA compliance infrastructure. Team of 6 PMs across abuse detection, identity, fraud, and compliance.</div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">2016 — 2022</div>
+        <div>
+          <div class="exp-company">Amazon</div>
+          <div class="exp-role">Senior Product Manager, Abuse Prevention</div>
+        </div>
+        <div class="exp-detail">Built ML-based enforcement systems across fraud and abuse prevention. Shipped a cross-org Abuse Policy Plugin used across enforcement workflows. Delivered significant reduction in SMS fraud losses through ML-driven detection and response systems.</div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">2014 — 2016</div>
+        <div>
+          <div class="exp-company">American Express</div>
+          <div class="exp-role">Credit Risk & Analytics</div>
+        </div>
+        <div class="exp-detail">Credit risk modeling and analytics. Early foundation in probabilistic decision-making systems where false positives carry direct financial consequences.</div>
+      </div>
+
+      <div class="exp-row">
+        <div class="exp-period">MBA</div>
+        <div>
+          <div class="exp-company">IIM Calcutta</div>
+          <div class="exp-role">Indian Institute of Management</div>
+        </div>
+        <div class="exp-detail"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Contact</span>
+        <span class="section-num">03</span>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <h2 class="contact-headline">Let's talk<br /><em>AI products.</em></h2>
+          <p class="contact-note">
+            Always up for conversations about voice AI, agent reliability, 
+            identity systems, or what you're building. Say hello.
+          </p>
+        </div>
+        <div class="contact-actions">
+
+          <a href="https://linkedin.com/in/vamseedhar-reddy-m" target="_blank" class="contact-btn">
+            <div>
+              <div class="btn-label">LinkedIn</div>
+              <div class="btn-value">vamseedhar-reddy-m</div>
+            </div>
+            <span class="btn-arrow">↗</span>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-text">Vamseedhar Reddy M · AI Product Builder</span>
+    <span class="footer-text">San Francisco · 2025</span>
+  </footer>
+
+  <script>
+    // Nav shadow on scroll
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-nav').style.borderBottomColor =
+        window.scrollY > 10 ? '#d0d0cc' : '#e6e6e2';
+    });
+  </script>
+
+</body>
+</html>
