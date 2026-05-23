@@ -83,9 +83,9 @@
       max-width: 1020px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.1fr 0.9fr;
       gap: 80px;
-      align-items: stretch;
+      align-items: end;
       min-height: 86vh;
     }
 
@@ -111,7 +111,7 @@
     .hero-name em { font-style: italic; }
 
     .hero-bio {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 400;
       color: var(--ink-mid);
       line-height: 1.75;
@@ -135,21 +135,13 @@
 
     .hero-links {
       border-top: 1px solid var(--border);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .hero-link-row {
-      flex: 1;
-      display: flex;
     }
 
     .hero-link-row a {
-      flex: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
       font-size: 18px;
       font-weight: 500;
@@ -574,6 +566,19 @@
           </div>
         </div>
         
+        <div class="project-card">
+          <div class="card-top">
+            <span class="status-pill pill-live">Live</span>
+          </div>
+          <div class="card-domain">Voice AI · Multi-Domain</div>
+          <div class="card-title">Voice AI Agent Suite</div>
+          <p class="card-desc">Three live voice agents — healthcare, HVAC, and insurance — that handle real inbound calls. Books appointments, dispatches technicians, and processes claims. Built on Vapi, Claude, and FastAPI. No app, no typing.</p>
+          <div class="card-footer">
+            <div class="card-tags"><span class="tag">Voice AI</span><span class="tag">Vapi</span><span class="tag">FastAPI</span><span class="tag">Claude</span></div>
+            <a href="https://vamseedhar-m.github.io/voice-ai-agent/" target="_blank" class="card-action card-action-link">Try it live →</a>
+          </div>
+        </div>
+
         <div class="project-card">
           <div class="card-top">
             <span class="status-pill pill-building">Building</span>
