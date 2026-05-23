@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vamseedhar Reddy · AI Product Builder</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --white: #ffffff;
@@ -44,14 +44,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 0 52px;
-      height: 58px;
+      height: 68px;
       transition: border-color 0.2s;
     }
 
     .nav-name {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 400;
-      font-size: 17px;
+      font-size: 22px;
       letter-spacing: 0.01em;
     }
 
@@ -62,8 +62,8 @@
     }
 
     .nav-links a {
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--ink-mid);
       transition: color 0.15s;
     }
@@ -85,24 +85,26 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
-      align-items: end;
+      align-items: stretch;
       min-height: 86vh;
     }
 
     .hero-label {
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      font-size: 14px;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-light);
+      font-weight: 500;
+      color: var(--ink-mid);
       margin-bottom: 24px;
     }
 
     .hero-name {
       font-family: 'Cormorant Garamond', Georgia, serif;
       font-weight: 400;
-      font-size: clamp(50px, 6vw, 78px);
+      font-size: clamp(40px, 5vw, 62px);
       line-height: 1.0;
       letter-spacing: -0.01em;
+      white-space: nowrap;
       margin-bottom: 32px;
     }
 
@@ -125,17 +127,32 @@
       margin-bottom: 40px;
     }
 
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
     .hero-links {
       border-top: 1px solid var(--border);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-link-row {
+      flex: 1;
+      display: flex;
     }
 
     .hero-link-row a {
+      flex: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 0;
       border-bottom: 1px solid var(--border);
-      font-size: 13px;
+      font-size: 18px;
+      font-weight: 500;
       color: var(--ink-mid);
       transition: color 0.15s;
     }
@@ -144,7 +161,7 @@
     .hero-link-row a:hover .arrow { transform: translate(3px, -3px); }
 
     .arrow {
-      font-size: 12px;
+      font-size: 14px;
       color: var(--ink-ghost);
       transition: transform 0.15s, color 0.15s;
     }
@@ -156,21 +173,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 0;
+      padding: 24px 0;
       border-top: 1px solid var(--border);
       margin-bottom: 52px;
     }
 
     .section-label {
-      font-size: 12px;
-      letter-spacing: 0.14em;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--ink-light);
+      color: var(--ink);
     }
 
     .section-num {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
+      font-size: 14px;
       font-style: italic;
       color: var(--ink-ghost);
     }
@@ -202,15 +220,8 @@
 
     .card-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: flex-start;
-    }
-
-    .card-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
-      font-style: italic;
-      color: var(--ink-ghost);
     }
 
     .status-pill {
@@ -266,8 +277,8 @@
 
     .card-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 400;
-      font-size: 21px;
+      font-weight: 500;
+      font-size: 23px;
       line-height: 1.25;
       color: var(--ink);
     }
@@ -311,6 +322,17 @@
       flex-shrink: 0;
     }
 
+    .card-action-link {
+      color: #1e62b0;
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .card-action-link:hover {
+      color: #1450a0;
+      text-decoration: underline;
+    }
+
     /* EXPERIENCE */
     #experience {
       padding: 96px 0;
@@ -329,16 +351,16 @@
     .exp-row:first-child { border-top: 1px solid var(--border); }
 
     .exp-period {
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--ink-light);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink-mid);
       padding-top: 3px;
     }
 
     .exp-company {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      font-weight: 400;
+      font-size: 22px;
+      font-weight: 500;
       color: var(--ink);
       line-height: 1.2;
     }
@@ -476,7 +498,7 @@
 <body>
 
   <nav id="main-nav">
-    <a href="#" class="nav-name">Vamseedhar Reddy</a>
+    <a href="#" class="nav-name">Vamseedhar Reddy M</a>
     <ul class="nav-links">
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -488,11 +510,11 @@
   <div id="hero">
     <div class="hero-left">
       <div class="hero-label">AI Product Builder · San Francisco</div>
-      <h1 class="hero-name">Vamseedhar<br /><em>Reddy M</em></h1>
+      <h1 class="hero-name">Vamseedhar <em>Reddy M</em></h1>
       <p class="hero-bio">
-        I ship AI products — voice agents, identity systems, intelligent enforcement — 
-        fast, and in environments where the cost of being wrong is real. 
-        Looking to do that at the earliest, most ambitious stage.
+        I ship AI agents, identity infrastructure, and the places where pace and accuracy are critical.
+        I build these things at work, after work, and in my head on walks.
+        Always chasing the next problem worth solving.
       </p>
     </div>
 
@@ -528,7 +550,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 01</span>
             <span class="status-pill pill-live">Live</span>
           </div>
           <div class="card-domain">Personal Tool</div>
@@ -542,7 +563,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 02</span>
             <span class="status-pill pill-live">Live</span>
           </div>
           <div class="card-domain">Agentic Workflow Automation</div>
@@ -556,7 +576,6 @@
         
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 03</span>
             <span class="status-pill pill-building">Building</span>
           </div>
           <div class="card-domain">Voice AI · Customer Support</div>
@@ -570,7 +589,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 04</span>
             <span class="status-pill pill-planned">Planned</span>
           </div>
           <div class="card-domain">AI Safety · Agent Reliability</div>
@@ -584,7 +602,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 05</span>
             <span class="status-pill pill-planned">Planned</span>
           </div>
           <div class="card-domain">Healthcare · Legal · Insurance</div>
@@ -598,7 +615,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 06</span>
             <span class="status-pill pill-planned">Planned</span>
           </div>
           <div class="card-domain">Personal Tool</div>
@@ -612,7 +628,6 @@
 
         <div class="project-card">
           <div class="card-top">
-            <span class="card-num">P — 07</span>
             <span class="status-pill pill-planned">Planned</span>
           </div>
           <div class="card-domain">Personal Tool</div>
